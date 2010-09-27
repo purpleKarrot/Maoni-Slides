@@ -1,4 +1,13 @@
 \documentclass[paper=screen,orient=landscape,style=aggie]{powerdot}
+\usepackage{listings}
+\usepackage{amssymb}
+
+\lstset{
+ language=C++,
+ basicstyle=\footnotesize,
+ morekeywords={RENDER_ALGORITHM,Color},
+ escapeinside=`'
+}
 
 \title{libMaoni}
 \author{Stefan Hutter \and Daniel Pfeifer}
@@ -7,10 +16,94 @@
 
 \maketitle
 
-\begin{slide}{Outline}
+\section{Overview}
+
+\begin{slide}{What is libMaoni?}
 \end{slide}
 
-\begin{slide}{Introduction}
+\begin{slide}{What it is not}
+\end{slide}
+
+\begin{slide}{Used Libraries and Licences}
+	\begin{description}
+		\item[Boost] Boost Software License
+		\item[Qt] GNU LGPL version 2.1.
+		\item[libQGLViewer] GNU GPL compatible
+		\item[IceT]
+		\item[Equalizer] LGPL
+	\end{description}
+	$ \Rrightarrow $ libMaoni is LGPL
+\end{slide}
+
+\begin{slide}{Toolchain}
+\begin{description}
+	\item[github] Repository for workflow and project leader independant development
+	\item[CMake] Meta Build System to create project files for different development environments and creating all software products from one source
+	\item[Documentation] Building PDF, Manpages or HTML documentation and API from the actual program version 
+	\item[Installer] tarballs, RPM/DEB Packages, NSIS Windows Installer, DMG
+\end{description}
+\end{slide}
+
+\begin{slide}{OS Independence}
+\begin{description}
+	\item[OS Architecture] libMaoni runs on 32bit and 64bit Architecture; OS X (Intel only), Linux and Windows as well.
+	\item[Dev Packages] libMaoni ships with all dependencies - no development kits necessary for running Maoni.
+\end{description}
+\end{slide}
+
+\section{Tutorials}
+
+\begin{slide}[method=file]{The First Algorithm}
+\begin{lstlisting}
+  /* Initializing code */
+
+  float Color1[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+  float Color2[] = { 0.0f, 1.0f, 0.0f, 1.0f };
+  float Color3[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+
+  glBegin(GL_TRIANGLES);
+  {
+    glColor4fv(Color1);  glVertex3f( 0.0f, 1.0f, 0.0f);
+    glColor4fv(Color2);  glVertex3f(-1.0f,-1.0f, 0.0f);
+    glColor4fv(Color3);  glVertex3f( 1.0f,-1.0f, 0.0f);
+  }
+  glEnd();
+
+  /* some more code */
+\end{lstlisting}
+\end{slide}
+
+\begin{slide}[method=file]{The First Algorithm}
+\begin{lstlisting}
+#include <Maoni.hpp>
+
+RENDER_ALGORITHM(Triangle,
+  (Color, Color1, Color(1.0f, 0.0f, 0.0f, 1.0f))
+  (Color, Color2, Color(0.0f, 1.0f, 0.0f, 1.0f))
+  (Color, Color3, Color(0.0f, 0.0f, 1.0f, 1.0f))
+)
+{
+  glBegin(GL_TRIANGLES);
+  {
+    glColor4fv(Color1);  glVertex3f( 0.0f, 1.0f, 0.0f);
+    glColor4fv(Color2);  glVertex3f(-1.0f,-1.0f, 0.0f);
+    glColor4fv(Color3);  glVertex3f( 1.0f,-1.0f, 0.0f);
+  }
+  glEnd();
+}
+\end{lstlisting}
+\end{slide}
+
+\begin{slide}{Extending libMaoni}
+\end{slide}
+
+\begin{slide}{libMaoni@VMML Education}
+\end{slide}
+
+\begin{slide}{libMaoni@VMML Research}
+\end{slide}
+
+\begin{slide}{Alien Technology}
 \end{slide}
 
 \end{document}
